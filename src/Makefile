@@ -2,9 +2,9 @@
 #BITS=12
 #EXECS=1
 #STREAMS=32
-ARQ=61
+ARCH=52
 
-arch= -gencode arch=compute_${ARQ},code=sm_${ARQ} -O3
+arch= -gencode arch=compute_${ARCH},code=sm_${ARCH} -O3
 
 all: mergeseg radixseg fixcub fixthrust newthrustsemaforo newthrustschedthr newthrustthr cpugputhrust
 

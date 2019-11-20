@@ -111,7 +111,8 @@ int main(int argc, char **argv)
 			cudaEventSynchronize(stop);
 			float milliseconds = 0;
 			cudaEventElapsedTime(&milliseconds, start, stop);
-			averageExecutions += milliseconds;
+			//averageExecutions += milliseconds;
+			std::cout << milliseconds << "\n";
 		}
 
 		cudaDeviceSynchronize();
@@ -127,9 +128,7 @@ int main(int argc, char **argv)
 	if (ELAPSED_TIME != 1) {
 		print(h_vec.data(), num_of_elements);
 	}
-	else {
-			std::cout << averageExecutions/EXECUTIONS << "\n";
-		}
+	//else {	std::cout << averageExecutions/EXECUTIONS << "\n";}
 
 	return 0;
 

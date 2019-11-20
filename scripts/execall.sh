@@ -1,7 +1,7 @@
 in=$1 # input files dir
 out=$2 # time files dir
 
-./../scripts/exec.sh bb_segsort/bbsegsort.exe $in 	> $out/bbsegsort.time
+./../scripts/exec.sh bbsegsort/bbsegsort.exe $in 	> $out/bbsegsort.time
 ./../scripts/exec.sh mergeseg.exe $in 			> $out/mergeseg.time
 ./../scripts/exec.sh radixseg.exe $in 			> $out/radixseg.time
 ./../scripts/exec.sh fixcub.exe $in 			> $out/fixcub.time
