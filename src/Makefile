@@ -11,9 +11,8 @@ all: mergeseg radixseg fixcub fixthrust newthrustsemaforo newthrustschedthr newt
 mergeseg: mergeseg.cu
 	nvcc $(arch) mergeseg.cu -o mergeseg.exe -I"../lib" -std=c++11 --expt-extended-lambda -lcuda -DELAPSED_TIME=$(TIME) -DEXECUTIONS=$(EXECS) -Xptxas="-v"
 
-
 radixseg: radixseg.cu
-	nvcc $(arch) radixseg.cu -o radixseg.exe -I"../../lib/cub" -std=c++11 --expt-extended-lambda -lcuda -DELAPSED_TIME=$(TIME) -DEXECUTIONS=$(EXECS)
+	nvcc $(arch) radixseg.cu -o radixseg.exe -I"../lib" -std=c++11 --expt-extended-lambda -lcuda -DELAPSED_TIME=$(TIME) -DEXECUTIONS=$(EXECS)
 
 fixcub: fixcub.cu
 	nvcc $(arch) fixcub.cu -o fixcub.exe -I"../lib" -std=c++11 --expt-extended-lambda -lcuda -DELAPSED_TIME=$(TIME) -DEXECUTIONS=$(EXECS)
