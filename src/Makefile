@@ -2,7 +2,7 @@
 #BITS=12
 #EXECS=1
 #STREAMS=32
-ARCH=52
+#ARCH=52
 
 arch= -gencode arch=compute_${ARCH},code=sm_${ARCH} -O3
 

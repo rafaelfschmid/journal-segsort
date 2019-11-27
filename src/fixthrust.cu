@@ -105,8 +105,8 @@ int main(void) {
 		if (ELAPSED_TIME == 1) {
 			float milliseconds = 0;
 			cudaEventElapsedTime(&milliseconds, start, stop);
-			//averageExecutions += milliseconds;
-			std::cout << milliseconds << "\n";
+			averageExecutions += milliseconds;
+			//std::cout << milliseconds << "\n";
 		}
 
 		cudaError_t errSync = cudaGetLastError();
@@ -122,7 +122,7 @@ int main(void) {
 	if (ELAPSED_TIME != 1) {
 		print(h_vec);
 	}
-	//else {std::cout << averageExecutions/EXECUTIONS << "\n";}
+	else {std::cout << averageExecutions/EXECUTIONS << "\n";}
 
 	return 0;
 }
