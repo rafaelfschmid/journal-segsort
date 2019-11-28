@@ -58,7 +58,6 @@ int main(int argc, char** argv) {
 
 	int number_of_segments = atoi(argv[1]);
 	int number_of_elements = atoi(argv[2]);
-	number_of_elements *= number_of_segments;
 
 	srand(time(NULL));
 	printf("%d\n", number_of_segments);

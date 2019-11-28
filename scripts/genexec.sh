@@ -9,24 +9,23 @@ echo "" > $out/fixcub.time
 echo "" > $out/fixthrust.time			
 	
 
-c=32768
-while [ $c -le 134217728 ]
+n=32768
+while [ $n -le 134217728 ]
 do
-	#echo $c 
-	d=1
-	while [[ $d -lt $c && $d -le 1048576 ]] 
+	s=1
+	while [[ $s -lt $n && $s -le 1048576 ]] 
 	do
-		echo -e "\n"$d"\n"$c >> $out/bbsegsort.time
-		echo -e "\n"$d"\n"$c >> $out/mergeseg.time
-	  	echo -e "\n"$d"\n"$c >> $out/radixseg.time
-		echo -e "\n"$d"\n"$c >> $out/fixcub.time
-		echo -e "\n"$d"\n"$c >> $out/fixthrust.time			
+		echo -e "\n"$s"\n"$n >> $out/bbsegsort.time
+		echo -e "\n"$s"\n"$n >> $out/mergeseg.time
+	  	echo -e "\n"$s"\n"$n >> $out/radixseg.time
+		echo -e "\n"$s"\n"$n >> $out/fixcub.time
+		echo -e "\n"$s"\n"$n >> $out/fixthrust.time			
 		
 		i=1
 		while [ $i -le  10 ] 
 		do
-			in=$d"_"$c"_"$i".in"
-			./$generator $d $c > $in
+			in=$s"_"$n"_"$i".in"
+			./$generator $s $n > $in
 
 			./bbsegsort/bbsegsort.exe 	< $in 	>> $out/bbsegsort.time
 			./mergeseg.exe 			< $in 	>> $out/mergeseg.time
@@ -37,8 +36,8 @@ do
 			rm -f $in
 			((i=$i+1))
 		done
-		((d=$d*2))
+		((s=$s*2))
 		
 	done
-	((c=$c*2))
+	((n=$n*2))
 done
