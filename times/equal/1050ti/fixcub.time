@@ -3244,6 +3244,35 @@
 368.452
 368.405
 368.848
-cuda returned error no CUDA-capable device is detected (code 100), line(63)
-cuda returned error no CUDA-capable device is detected (code 100), line(63)
-cuda returned error no CUDA-capable device is detected (code 100), line(63)
+370.895
+368.659
+368.452
+368.405
+368.848
+
+
+524288
+134217728
+370.643
+370.234
+370.174
+371.68
+372.894
+371.834
+372.647
+372.848
+373.027
+373.294
+
+1048576
+134217728
+374.926
+374.968
+373.385
+372.915
+373.658
+374.584
+373.885
+374.006
+372.982
+374.596

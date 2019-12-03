@@ -3244,6 +3244,35 @@
 1446.61
 1448.25
 1444.95
-cuda returned error no CUDA-capable device is detected (code 100), line(49)
-cuda returned error no CUDA-capable device is detected (code 100), line(49)
-cuda returned error no CUDA-capable device is detected (code 100), line(49)
+1445.42
+1448.16
+1446.61
+1448.25
+1444.95
+
+
+524288
+134217728
+2783.99
+2791.19
+2801.08
+2798.86
+2798.09
+2798.36
+2799.24
+2806.39
+2801.3
+2806.09
+
+1048576
+134217728
+5444.16
+5449.76
+5432.74
+5438.26
+5459.74
+5450.91
+5458.42
+5455.33
+5450.46
+5441.28
