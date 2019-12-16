@@ -76,6 +76,7 @@ int main(void) {
 	thrust::device_vector<uint> d_vec(num_of_elements);
 	thrust::device_vector<uint> d_seg = h_seg;
 
+	float averageExecutions = 0;
 	for (uint i = 0; i < EXECUTIONS; i++) {
 		thrust::copy(h_vec.begin(), h_vec.end(), d_vec.begin());
 		/*
@@ -109,7 +110,8 @@ int main(void) {
 			float millisecondsPre = 0, millisecondsPos = 0;
 			cudaEventElapsedTime(&millisecondsPre, startPre, stopPre);
 			cudaEventElapsedTime(&millisecondsPos, startPos, stopPos);
-			std::cout << millisecondsPre + millisecondsPos << "\n";
+			//std::cout << millisecondsPre + millisecondsPos << "\n";
+			averageExecutions += millisecondsPre + millisecondsPos;
 		}
 
 		cudaError_t errSync = cudaGetLastError();
@@ -125,6 +127,7 @@ int main(void) {
 	if (ELAPSED_TIME != 1) {
 		print(h_vec);
 	}
+	else {std::cout << averageExecutions/EXECUTIONS << "\n";}
 
 	return 0;
 }

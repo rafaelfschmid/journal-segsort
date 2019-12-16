@@ -132,6 +132,7 @@ int main(void) {
 	size_t temp_bytes = 0;
 	int grid = ((num_of_elements-1)/BLOCK_SIZE) + 1;
 
+	float averageExecutions = 0;
 	for (uint i = 0; i < EXECUTIONS; i++) {
 		cudaTest(cudaMemcpy(d_vec, h_vec, mem_size_vec, cudaMemcpyHostToDevice));
 
@@ -175,7 +176,8 @@ int main(void) {
 			float millisecondsPre = 0, millisecondsPos = 0;
 			cudaEventElapsedTime(&millisecondsPre, startPre, stopPre);
 			cudaEventElapsedTime(&millisecondsPos, startPos, stopPos);
-			std::cout << millisecondsPre + millisecondsPos << "\n";
+			//std::cout << millisecondsPre + millisecondsPos << "\n";
+			averageExecutions += millisecondsPre + millisecondsPos;
 		}
 
 		cudaFree(d_temp_storage);
@@ -201,6 +203,7 @@ int main(void) {
 	if (ELAPSED_TIME != 1) {
 		print(h_vec, num_of_elements);
 	}
+	else {std::cout << averageExecutions/EXECUTIONS << "\n";}
 
 	free(h_seg_aux);
 	free(h_seg);
