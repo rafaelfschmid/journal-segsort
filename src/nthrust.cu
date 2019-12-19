@@ -46,6 +46,7 @@ int main(void) {
 
 	thrust::device_vector<uint> d_vec(num_of_elements);
 
+	float averageExecutions = 0;
 	for (uint i = 0; i < EXECUTIONS; i++) {
 		cudaEvent_t start, stop;
 		cudaEventCreate(&start);
@@ -64,7 +65,8 @@ int main(void) {
 			cudaEventSynchronize(stop);
 			float milliseconds = 0;
 			cudaEventElapsedTime(&milliseconds, start, stop);
-			std::cout << milliseconds << "\n";
+			averageExecutions += milliseconds;
+						//std::cout << milliseconds << "\n";
 		}
 
 		cudaDeviceSynchronize();
@@ -75,6 +77,7 @@ int main(void) {
 	if (ELAPSED_TIME != 1) {
 		print(h_vec);
 	}
+	else {std::cout << averageExecutions/EXECUTIONS << "\n";}
 
 	return 0;
 }
