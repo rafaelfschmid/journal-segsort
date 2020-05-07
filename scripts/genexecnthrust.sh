@@ -23,9 +23,9 @@ do
 			in=$s"_"$n"_"$i".in"
 			./$generator $s $n > $in
 
-			./fixpasscub.exe 	< $in 	>> $out/newthrustthr.time
-			./fixpassthrust.exe	< $in	>> $out/newthrustschedthr.time
-			./fixpassthrust.exe	< $in	>> $out/nthrust.time				
+			./newthrust32thr.exe 	< $in 	>> $out/newthrustthr.time
+			./newthrust32schedthr.exe	< $in	>> $out/newthrustschedthr.time
+			./nthrust.exe		< $in	>> $out/nthrust.time				
 
 			rm -f $in
 			((i=$i+1))
