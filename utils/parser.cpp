@@ -21,6 +21,8 @@ int main(int argc, char **argv) {
 	if (input.is_open()) {
 		int k = 0;
 		getline(input, line);
+		getline(input, line);
+
 		while (getline(input, line)) {
 			//cout << k++ << "\n";
 			std::vector<std::vector<double> > multiple_times;
