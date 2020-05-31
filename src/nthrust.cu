@@ -46,12 +46,12 @@ int main(void) {
 
 	thrust::device_vector<uint> d_vec(num_of_elements);
 
+	cudaEvent_t start, stop;
+	cudaEventCreate(&start);
+	cudaEventCreate(&stop);
+
 	float averageExecutions = 0;
 	for (uint i = 0; i < EXECUTIONS; i++) {
-		cudaEvent_t start, stop;
-		cudaEventCreate(&start);
-		cudaEventCreate(&stop);
-
 		thrust::copy(h_vec.begin(), h_vec.end(), d_vec.begin());
 
 		cudaEventRecord(start);
@@ -69,7 +69,12 @@ int main(void) {
 						//std::cout << milliseconds << "\n";
 		}
 
-		cudaDeviceSynchronize();
+		cudaError_t errSync = cudaGetLastError();
+		cudaError_t errAsync = cudaDeviceSynchronize();
+		if (errSync != cudaSuccess)
+			printf("4: Sync kernel error: %s\n", cudaGetErrorString(errSync));
+		if (errAsync != cudaSuccess)
+			printf("4: Async kernel error: %s\n", cudaGetErrorString(errAsync));
 	}
 
 	thrust::copy(d_vec.begin(), d_vec.end(), h_vec.begin());
