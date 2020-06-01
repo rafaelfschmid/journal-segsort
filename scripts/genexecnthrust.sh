@@ -30,8 +30,7 @@ do
 			rm -f $in
 			((i=$i+1))
 		done
-		((s=$s*2))
-		
+		((s=$s*2))		
 	done
 	((n=$n*2))
 done
