@@ -13,13 +13,15 @@ scurveGenerator = True
 abbreviations = {'bbsegsort':'H','mergeseg':'M','radixseg':'R','nthrust':'MT','fixthrust':'FT','fixcub':'FC', '--':'--'}
 
 # Symbols to be plotted in scurve
-symbols = {'bbsegsort':'.-','mergeseg':'*-','radixseg':'v-','nthrust':'x-','fixthrust':'m+-','fixcub':'y|-'}
+symbols = {'bbsegsort':'o--','mergeseg':'*--','radixseg':'v--','nthrust':'d--','fixthrust':'P--','fixcub':'s--'}
 
 # Colors of each strategy
 colors = {'bbsegsort':'green','mergeseg':'blue','radixseg':'red','nthrust':'purple','fixthrust':'brown','fixcub':'orange'}
 #######################################################################################################################
 # Gerar gráfico de tempo do Fix? True or False
 fixtimesGenerator = True
+
+fixpassLabels = {'fixpasscub':'Fix Step of FC', 'fixpassthrust':'Fix Step of FT'}
 
 # Número de segmentos para a geração do gráfico
 fixtimes_seg = 32768

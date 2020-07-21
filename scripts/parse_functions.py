@@ -40,14 +40,14 @@ def scan_machine_dirs(dirFiles, machine):
 			gen_functions.create_scurve(scurves, scurveFile)
 
 		if(config_generator.fixspeedupGenerator): 
-			fixspeedupFile = "output/fix/speedup" + files_name + ".eps"
-			create_output_dir("output/fix/speedup")
+			fixspeedupFile = "output/fix/speedup/" + files_name + ".eps"
+			create_output_dir("output/fix/speedup/")
 			results = calc_functions.calc_fix_speedup(vecMap)	
 			gen_functions.create_fix_speedup(results, fixspeedupFile)
 
 		if(config_generator.fixstepsGenerator): 
 			fixstepsFile = "output/fix/steps/" + files_name + ".eps"
-			create_output_dir("output/fix/steps")
+			create_output_dir("output/fix/steps/")
 			results = calc_functions.calc_fix_steps(vecMap)	
 			gen_functions.create_fix_steps(results, fixstepsFile)
 

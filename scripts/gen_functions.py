@@ -6,6 +6,7 @@ import tex_code
 import config_generator
 import config_executor
 import parse_functions
+import numpy
 
 def create_tex(bestStrategies, texFile, machine, equalOrDiff):
 	parse_functions.removing_existing_file(texFile)
@@ -242,12 +243,18 @@ def create_scurve(scurves, scurveFile):
 	ax = fig.add_subplot(1, 1, 1)
 	ax.set_ylim([0, 9])
 
+	for i in range(1,10,1):
+		plt.axhline(y = i, color ="black", linestyle ="--", linewidth=0.1, dashes=(5, 10)) 
+
 	for strategy in scurves:
 		length = len(scurves[strategy])
-		marks = int(length/30+1)
-		plt.plot(scurves[strategy], config_generator.symbols[strategy], color=config_generator.colors[strategy], markevery=marks, label=config_generator.abbreviations[strategy])
+		middle = int(length/2-1)
+		markers_on = [0, middle, length-1]
+		#plt.plot(scurves[strategy], config_generator.symbols[strategy], color=config_generator.colors[strategy], markevery=marks, label=config_generator.abbreviations[strategy])
+		plt.plot(scurves[strategy], config_generator.symbols[strategy], color=config_generator.colors[strategy], markevery=markers_on, label=config_generator.abbreviations[strategy], dashes=(5, 5))
 
 	plt.ylabel('Normalized Times')
+	plt.locator_params(nbins=3)
 	plt.xticks([]) # hide axis x
 	plt.legend() # show line names
 	
@@ -260,7 +267,29 @@ def generate_multiple_scurves(scurves, outputdir):
 	for strategy in scurves:
 		create_scurve(scurves[strategy], outputdir + strategy + ".eps")
 
+def create_scurve_csv(scurves, scurveCSV):
+	parse_functions.removing_existing_file(scurveCSV)
+	print("Creating scurve CSV file: " + scurveCSV)
+	f = open(scurveCSV, 'w')
+	
+	import matplotlib.pylab as plt
 
+	for strategy in scurves:
+		f.write(strategy+";")
+	f.write("\n")
+	
+	for i in range(0, len(scurves['fixthrust'])):
+		for strategy in scurves:
+			if i < len(scurves[strategy]):
+				f.write("{:.2f}".format(scurves[strategy][i])+";")
+			else:
+				f.write(";")
+	
+		f.write("\n")
+
+	
+
+	f.close()
 def create_avg_fix_speedup(results, fixspeedupFile):
 	parse_functions.removing_existing_file(fixspeedupFile)
 	print("Creating fix speedup file: " + fixspeedupFile)
@@ -271,6 +300,9 @@ def create_avg_fix_speedup(results, fixspeedupFile):
 	fig = plt.figure()
 	ax = fig.add_subplot(1, 1, 1)
 	ax.set_ylim([0, 9])
+
+	for i in range(1,10,1):
+		plt.axhline(y = i, color ="black", linestyle ="--", linewidth=0.1, dashes=(5, 10)) 
 
 	for i in range(1, 4):	
 		for entry in results:
@@ -306,6 +338,9 @@ def create_hou_curve(houCurve, houFile):
 	ax = fig.add_subplot(1, 1, 1)
 	ax.set_ylim([0, 1.5])
 	
+	for i in numpy.arange(0.25, 1.75, 0.25):
+		plt.axhline(y = i, color ="black", linestyle ="--", linewidth=0.1, dashes=(5, 10)) 
+
 	for length in houCurve:
 		if(length > 530000):
 			continue;
@@ -315,7 +350,7 @@ def create_hou_curve(houCurve, houFile):
 	#for seg in houCurve:
 #		plt.plot(houCurve[seg], config_generator.symbols[strategy], color=config_generator.colors[strategy], label=config_generator.abbreviations[strategy])
 
-	plt.ylabel('Execution Time')
+	plt.ylabel('Execution Time (ms)')
 	plt.xlabel('Number of Segments')
 	plt.xticks(rotation=30) # rotate
 	plt.subplots_adjust(bottom=0.2) # increment border
@@ -335,14 +370,18 @@ def create_fix_times(fixTimes, fixFile):
 
 	fig = plt.figure()
 	ax = fig.add_subplot(1, 1, 1)
-	#ax.set_ylim([0, 5])
+	ax.set_ylim([0, 80])
+
+	for i in range(10,90,10):
+		plt.axhline(y = i, color ="black", linestyle ="--", linewidth=0.1, dashes=(5, 10)) 
 	
 	for strategy in fixTimes:
-		plt.plot(fixTimes[strategy][seg][0], fixTimes[strategy][seg][1], label=str(strategy))
+		plt.plot(fixTimes[strategy][seg][0], fixTimes[strategy][seg][1], label=config_generator.fixpassLabels[strategy])
 
-	plt.ylabel('Execution Time')
+	plt.ylabel('Execution Time (ms)')
 	plt.xlabel('Array lenght')
 	plt.xticks(rotation=30) # rotate
+	plt.subplots_adjust(bottom=0.2) # increment border
 	plt.legend()
 	#plt.subplots_adjust(bottom=0.2, right=0.75) # increment border
 	#plt.xticks([]) # hide axis x
@@ -362,6 +401,9 @@ def create_fix_speedup(results, fixspeedupFile):
 	fig = plt.figure()
 	ax = fig.add_subplot(1, 1, 1)
 	ax.set_ylim([0, 9])
+
+	for i in range(1,10,1):
+		plt.axhline(y = i, color ="black", linestyle ="--", linewidth=0.1, dashes=(5, 10)) 
 	
 	for entry in results:
 		plt.plot(results[entry][seg][0], results[entry][seg][1], config_generator.fixspeedupSymbols[entry], label=config_generator.fixspeedupLabels[entry])
@@ -389,6 +431,9 @@ def create_fix_steps(results, fixstepsFile):
 	ax = fig.add_subplot(1, 1, 1)
 	ax.set_ylim([0, 70])
 	ax.yaxis.set_major_formatter(mtick.PercentFormatter())
+
+	for i in range(10,80,10):
+		plt.axhline(y = i, color ="black", linestyle ="--", linewidth=0.1, dashes=(5, 10)) 
 
 	for entry in results:
 		plt.plot(results[entry][seg][0], results[entry][seg][1], config_generator.fixstepsSymbols[entry], label=config_generator.fixstepsLabels[entry])

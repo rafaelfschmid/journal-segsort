@@ -2,3 +2,6 @@
 *.nvvp
 *.in
 *.out
+*.csv
+*.eps
+*.tex

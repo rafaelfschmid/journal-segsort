@@ -46,6 +46,7 @@ else:
 	
 	scurves = calc_functions.calc_the_scurves(vecMaps, bestValues, strategies)
 	gen_functions.create_scurve(scurves, "output/scurve.eps")
+	gen_functions.create_scurve_csv(scurves, "output/scurve.csv")
 
 	fixspeedup = calc_functions.calc_avg_fix_speedup(vecMaps)	
 	gen_functions.create_avg_fix_speedup(fixspeedup, "output/avg-fix-speedup.eps")
